@@ -41,6 +41,7 @@ export class AnnotationPanel{
 						Can be multiple lines long. TODO: the user should be able
 						to modify title and description. 
 				</div>
+				<button id="save_camera">Set camera position</button>
 
 			</div>
 
@@ -71,6 +72,13 @@ export class AnnotationPanel{
 			const description = this.elDescription.html();
 			annotation.description = description;
 		}, false);
+
+		this.elSaveCamera = this.elContent.find("#save_camera");
+		this.elSaveCamera.click( () => {
+			// Deep copy
+			this.annotation.cameraPosition = JSON.parse(JSON.stringify(viewer.scene.cameraP.position));
+			this.annotation.cameraTarget = this.annotation.position;
+		})
 
 		this.update();
 	}
